@@ -2,28 +2,38 @@ const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-// Try multiple paths for .env.local
-const envPaths = [
-  path.join(__dirname, '../.env.local'),
-  path.join(process.cwd(), '.env.local'),
-  '.env.local'
-];
+// Check if DATABASE_URL is already set in environment (e.g., Vercel environment variables)
+if (process.env.DATABASE_URL) {
+  console.log('✅ Using DATABASE_URL from environment variables');
+} else {
+  // Try multiple paths for .env.local
+  const envPaths = [
+    path.join(__dirname, '../.env.local'),
+    path.join(process.cwd(), '.env.local'),
+    '.env.local'
+  ];
 
-let envLoaded = false;
-for (const envPath of envPaths) {
-  if (fs.existsSync(envPath)) {
-    console.log('Loading .env.local from:', envPath);
-    require('dotenv').config({ path: envPath });
-    envLoaded = true;
-    break;
+  let envLoaded = false;
+  for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+      console.log('Loading .env.local from:', envPath);
+      require('dotenv').config({ path: envPath });
+      envLoaded = true;
+      break;
+    }
   }
-}
 
-if (!envLoaded) {
-  console.log('Tried these paths:');
-  envPaths.forEach(p => console.log('  -', p));
-  console.error('❌ .env.local file not found');
-  process.exit(1);
+  if (!envLoaded) {
+    console.log('Tried these paths:');
+    envPaths.forEach(p => console.log('  -', p));
+    console.log('❌ .env.local file not found, but continuing to check for environment variables');
+  }
+  
+  // Final check if DATABASE_URL is available
+  if (!process.env.DATABASE_URL) {
+    console.error('❌ DATABASE_URL not found in environment variables or .env.local');
+    process.exit(1);
+  }
 }
 
 const pool = new Pool({
