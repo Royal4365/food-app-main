@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Colors */
+  --primary: #1a4037; /* main brand color, dark green */
+  --secondary: #2d544c; /* accents and hover states */
+  --light-green: #4a6b5c; /* subtle highlights */
+  
+  /* Background Colors */
+  --background: #faf8f5; /* warm off-white */
+  --card-bg: #ffffff; /* pure white for cards */
+  --section-bg: #f5f3f0; /* light beige sections */
+  --overlay-hero: rgba(26, 64, 55, 0.85); /* semi-transparent dark green */
+  --overlay-backdrop: --beige-400;
+  
+  /* Text Colors */
+  --foreground: #1a4037; /* primary text */
+  --text-secondary: #5a5a5a; /* descriptions, labels */
+  --text-light: #ffffff; /* on dark backgrounds */
+  --text-accent: #1a4037; /* prices, highlights */
+  
+  /* Status Colors */
+  --success: #16a34a; /* confirmations */
+  --warning: #ea580c; /* discounts */
+  
+  /* Legacy Colors (for compatibility) */
+  --primary-600: #4a6b5c;
+  --primary-800: #0f2b21;
+  --beige: #ffffff;
+  --beige-200: #f5f3f0;
+  --beige-400: #f0eeea;
+  --gold: #ffd700;
+  --discount: #ea580c; /* updated to match warning */
+  --input-border: #d0d0d0;
+}
+
+@theme inline {
+  /* Primary Colors */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-light-green: var(--light-green);
+  
+  /* Background Colors */
+  --color-background: var(--background);
+  --color-card: var(--card-bg);
+  --color-section: var(--section-bg);
+  --color-overlay-hero: var(--overlay-hero);
+  --color-overlay-backdrop: var(--overlay-backdrop);
+  
+  /* Text Colors */
+  --color-foreground: var(--foreground);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-light: var(--text-light);
+  --color-text-accent: var(--text-accent);
+  
+  /* Status Colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  
+  /* Legacy Colors (for compatibility) */
+  --color-primary-600: var(--primary-600);
+  --color-primary-800: var(--primary-800);
+  --color-beige: var(--beige);
+  --color-beige-200: var(--beige-200);
+  --color-beige-400: var(--beige-400);
+  --color-gold: var(--gold);
+  --color-discount: var(--discount);
+  --color-input-border: var(--input-border);
+  
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+
+  @keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+  @keyframes slide-in { from { transform: translateY(8px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+  @keyframes scale-up { from { transform: scale(1) } to { transform: scale(1.05) } }
+  @keyframes float { 0%, 100% { transform: translateY(0px) } 50% { transform: translateY(-10px) } }
+  @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(26, 64, 55, 0.3) } 50% { box-shadow: 0 0 30px rgba(26, 64, 55, 0.6) } }
+  @keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+.animate-fade-in { animation: fade-in 0.4s ease-in-out both }
+.animate-slide-in { animation: slide-in 0.3s ease-out both }
+.hover\:animate-scale-up:hover { animation: scale-up 0.15s ease-out both }
+.animate-float { animation: float 3s ease-in-out infinite }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite }
+.animate-shimmer { 
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Enhanced shadow utilities */
+.shadow-3xl { box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25) }
+.shadow-4xl { box-shadow: 0 45px 80px -12px rgba(0, 0, 0, 0.3) }
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Premium gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

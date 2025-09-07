@@ -1,0 +1,131 @@
+{
+  "categories": ["Veg Thali", "Non-Veg Thali", "Special Thali"],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Pune Thali House",
+      "category": "Veg Thali",
+      "image": "https://placehold.co/1200x800?text=Maharashtrian+Thali",
+      "logo": "https://placehold.co/100x100?text=Logo",
+      "rating": 4.5,
+      "discount": "20% OFF",
+      "menu": [
+        {
+          "name": "Special Veg Thali",
+          "price": 250,
+          "rating": 4.7,
+          "quantity": 1,
+          "content": "3 Chapatis, 2 Bhaji, Rice, Dal, Dessert (Gulab Jamun)",
+          "hasDessert": true
+        },
+        {
+          "name": "Regular Veg Thali",
+          "price": 200,
+          "rating": 4.5,
+          "quantity": 1,
+          "content": "3 Chapatis, 2 Bhaji, Rice, Dal",
+          "hasDessert": false
+        },
+        {
+          "name": "Chapati Bhaji",
+          "price": 150,
+          "rating": 4.3,
+          "quantity": 1,
+          "content": "4 Chapatis, Bhaji",
+          "hasDessert": false
+        },
+        {
+          "name": "Dal Rice",
+          "price": 100,
+          "rating": 4.2,
+          "quantity": 1,
+          "content": "Dal, Rice",
+          "hasDessert": false
+        },
+        {
+          "name": "Special Non-Veg Thali",
+          "price": 300,
+          "rating": 4.8,
+          "quantity": 1,
+          "content": "3 Chapatis, Chicken Curry, Rice, Dal, Dessert (Shrikhand)",
+          "hasDessert": true
+        }
+      ],
+      "extras": ["Extra Chapati (₹20)", "Extra Sweet (₹30)", "Extra Salad (₹15)"]
+    },
+    {
+      "id": 2,
+      "name": "Mumbai Spice Kitchen",
+      "category": "Non-Veg Thali",
+      "image": "https://placehold.co/1200x800?text=Non-Veg+Thali",
+      "logo": "https://placehold.co/100x100?text=Logo",
+      "rating": 4.8,
+      "discount": "15% OFF",
+      "menu": [
+        {
+          "name": "Special Non-Veg Thali",
+          "price": 300,
+          "rating": 4.8,
+          "quantity": 1,
+          "content": "3 Chapatis, Chicken Curry, Rice, Dal, Dessert (Shrikhand)",
+          "hasDessert": true
+        },
+        {
+          "name": "Regular Non-Veg Thali",
+          "price": 250,
+          "rating": 4.6,
+          "quantity": 1,
+          "content": "3 Chapatis, Chicken Curry, Rice, Dal",
+          "hasDessert": false
+        },
+        {
+          "name": "Mutton Thali",
+          "price": 350,
+          "rating": 4.9,
+          "quantity": 1,
+          "content": "3 Chapatis, Mutton Curry, Rice, Dal, Dessert (Gulab Jamun)",
+          "hasDessert": true
+        }
+      ],
+      "extras": ["Extra Chapati (₹20)", "Extra Chicken (₹50)", "Extra Sweet (₹30)"]
+    },
+    {
+      "id": 3,
+      "name": "Kolhapur Royal Kitchen",
+      "category": "Special Thali",
+      "image": "https://placehold.co/1200x800?text=Special+Thali",
+      "logo": "https://placehold.co/100x100?text=Logo",
+      "rating": 4.9,
+      "discount": "25% OFF",
+      "menu": [
+        {
+          "name": "Royal Special Thali",
+          "price": 400,
+          "rating": 4.9,
+          "quantity": 1,
+          "content": "4 Chapatis, 3 Bhaji, Rice, Dal, Gulab Jamun & Shrikhand",
+          "hasDessert": true
+        },
+        {
+          "name": "Kolhapuri Special",
+          "price": 350,
+          "rating": 4.8,
+          "quantity": 1,
+          "content": "3 Chapatis, Kolhapuri Chicken, Rice, Dal, Dessert (Shrikhand)",
+          "hasDessert": true
+        },
+        {
+          "name": "Maharashtrian Delight",
+          "price": 280,
+          "rating": 4.7,
+          "quantity": 1,
+          "content": "3 Chapatis, 2 Bhaji, Rice, Dal, Dessert (Gulab Jamun)",
+          "hasDessert": true
+        }
+      ],
+      "extras": ["Extra Chapati (₹20)", "Extra Sweet (₹30)", "Extra Salad (₹15)", "Extra Dessert (₹40)"]
+    }
+  ]
+}
+
+
