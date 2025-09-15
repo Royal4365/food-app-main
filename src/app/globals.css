@@ -92,6 +92,25 @@ body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
+/* Ensure all input elements have black text */
+input, textarea, select, input[type], textarea[type], select[type], .block, form input, form textarea, form select, input[type="text"], input[type="email"], input[type="password"], textarea[type="text"], select[type="text"] {
+  color: #000000 !important;
+}
+
+/* Ensure profile details text is black */
+.bg-\[\#f5f3f0\] span, .rounded-lg span {
+  color: #000000 !important;
+}
+
+/* Style placeholders with darker color for better readability */
+::placeholder,
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #666666 !important;
+  opacity: 1;
+}
+
 .animate-fade-in { animation: fade-in 0.4s ease-in-out both }
 .animate-slide-in { animation: slide-in 0.3s ease-out both }
 .hover\:animate-scale-up:hover { animation: scale-up 0.15s ease-out both }
