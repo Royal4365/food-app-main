@@ -50,27 +50,6 @@ export interface RestaurantExtra {
   created_at: string;
 }
 
-// Type definition for the local JSON data structure
-interface LocalRestaurant {
-  id: number;
-  name: string;
-  category: string;
-  image: string;
-  logo: string;
-  rating: number;
-  discount: string;
-  menu: any[];
-  extras: any[];
-  // These properties are present in the final Restaurant interface,
-  // but may not be in the initial local JSON data.
-  address?: string;
-  phone?: string;
-  hours?: string;
-  delivery_radius?: string;
-  delivery_time?: string;
-  features?: string[];
-}
-
 // API Functions
 export async function getRestaurants(): Promise<Restaurant[]> {
   try {
@@ -80,33 +59,7 @@ export async function getRestaurants(): Promise<Restaurant[]> {
     return result.rows;
   } catch (error) {
     console.error("Error fetching restaurants from database:", error);
-    console.log("Falling back to local JSON data for restaurants");
-
-    try {
-      const localData = (await import("../data/restaurants.json")).default;
-
-      return localData.restaurants.map((restaurant: LocalRestaurant) => ({
-        id: restaurant.id.toString(),
-        name: restaurant.name,
-        category: restaurant.category,
-        image_url: restaurant.image,
-        logo_url: restaurant.logo,
-        rating: restaurant.rating,
-        discount: restaurant.discount,
-        address: restaurant.address || "Pune, Maharashtra",
-        phone: restaurant.phone || "+91 9876543210",
-        hours: restaurant.hours || "10:00 AM - 10:00 PM",
-        delivery_radius: restaurant.delivery_radius || "5 km",
-        delivery_time: restaurant.delivery_time || "30-45 min",
-        features: restaurant.features || ["Dine-in", "Takeaway", "Delivery"],
-        is_active: true,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      }));
-    } catch (fallbackError) {
-      console.error("Error fetching from fallback JSON:", fallbackError);
-      throw new Error("Failed to fetch restaurants from all sources");
-    }
+    throw new Error("Failed to fetch restaurants");
   }
 }
 
@@ -121,41 +74,7 @@ export async function getRestaurantById(
     return result.rows[0] || null;
   } catch (error) {
     console.error("Error fetching restaurant by ID from database:", error);
-    console.log("Falling back to local JSON data for restaurant by ID");
-
-    try {
-      const localData = (await import("../data/restaurants.json")).default;
-
-      const restaurant = localData.restaurants.find(
-        (r: LocalRestaurant) => r.id.toString() === id
-      );
-
-      if (!restaurant) {
-        return null;
-      }
-
-      return {
-        id: restaurant.id.toString(),
-        name: restaurant.name,
-        category: restaurant.category,
-        image_url: restaurant.image,
-        logo_url: restaurant.logo,
-        rating: restaurant.rating,
-        discount: restaurant.discount,
-        address: restaurant.address || "Pune, Maharashtra",
-        phone: restaurant.phone || "+91 9876543210",
-        hours: restaurant.hours || "10:00 AM - 10:00 PM",
-        delivery_radius: restaurant.delivery_radius || "5 km",
-        delivery_time: restaurant.delivery_time || "30-45 min",
-        features: restaurant.features || ["Dine-in", "Takeaway", "Delivery"],
-        is_active: true,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      };
-    } catch (fallbackError) {
-      console.error("Error fetching from fallback JSON:", fallbackError);
-      throw new Error("Failed to fetch restaurant from all sources");
-    }
+    throw new Error("Failed to fetch restaurant from all sources");
   }
 }
 
@@ -167,22 +86,7 @@ export async function getCategories(): Promise<Category[]> {
     return result.rows;
   } catch (error) {
     console.error("Error fetching categories from database:", error);
-    console.log("Falling back to local JSON data for categories");
-
-    try {
-      const localData = (await import("../data/restaurants.json")).default;
-
-      return localData.categories.map((category: string, index: number) => ({
-        id: (index + 1).toString(),
-        name: category,
-        description: `${category} from Maharashtra cuisine`,
-        is_active: true,
-        created_at: new Date().toISOString(),
-      }));
-    } catch (fallbackError) {
-      console.error("Error fetching from fallback JSON:", fallbackError);
-      throw new Error("Failed to fetch categories from all sources");
-    }
+    throw new Error("Failed to fetch categories from all sources");
   }
 }
 
@@ -195,35 +99,7 @@ export async function getMenuItems(restaurantId: string): Promise<MenuItem[]> {
     return result.rows;
   } catch (error) {
     console.error("Error fetching menu items from database:", error);
-    console.log("Falling back to local JSON data for menu items");
-
-    try {
-      const localData = (await import("../data/restaurants.json")).default;
-
-      const restaurant = localData.restaurants.find(
-        (r: LocalRestaurant) => r.id.toString() === restaurantId
-      );
-
-      if (!restaurant) {
-        return [];
-      }
-
-      return restaurant.menu.map((item: any, index: number) => ({
-        id: `${restaurantId}-${index + 1}`,
-        restaurant_id: restaurantId,
-        name: item.name,
-        price: item.price,
-        rating: item.rating,
-        content: item.content,
-        has_dessert: item.hasDessert,
-        is_available: true,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      }));
-    } catch (fallbackError) {
-      console.error("Error fetching from fallback JSON:", fallbackError);
-      throw new Error("Failed to fetch menu items from all sources");
-    }
+    throw new Error("Failed to fetch menu items from all sources");
   }
 }
 
@@ -238,40 +114,7 @@ export async function getRestaurantExtras(
     return result.rows;
   } catch (error) {
     console.error("Error fetching restaurant extras from database:", error);
-    console.log("Falling back to local JSON data for restaurant extras");
-
-    try {
-      const localData = (await import("../data/restaurants.json")).default;
-
-      const restaurant = localData.restaurants.find(
-        (r: LocalRestaurant) => r.id.toString() === restaurantId
-      );
-
-      if (!restaurant) {
-        return [];
-      }
-
-      const defaultExtras = [
-        { name: "Extra Chapati", price: 15 },
-        { name: "Extra Rice", price: 30 },
-        { name: "Extra Dessert", price: 40 },
-        { name: "Extra Pickle", price: 10 },
-      ];
-
-      const extrasSource = restaurant.extras || defaultExtras;
-
-      return extrasSource.map((item: any, index: number) => ({
-        id: `${restaurantId}-extra-${index + 1}`,
-        restaurant_id: restaurantId,
-        name: item.name,
-        price: item.price,
-        is_available: true,
-        created_at: new Date().toISOString(),
-      }));
-    } catch (fallbackError) {
-      console.error("Error fetching from fallback JSON:", fallbackError);
-      throw new Error("Failed to fetch restaurant extras from all sources");
-    }
+    throw new Error("Failed to fetch restaurant extras from all sources");
   }
 }
 
