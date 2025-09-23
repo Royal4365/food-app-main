@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { pool } from '@/lib/db';
+import { getRestaurantById } from '@/lib/api-client';
 
 export async function GET(
   request: NextRequest,
@@ -7,9 +7,9 @@ export async function GET(
 ): Promise<NextResponse> {
   try {
     const { id } = await context.params;
-    const result = await pool.query('SELECT * FROM restaurants WHERE id = $1', [id]);
+    const restaurant = await getRestaurantById(id);
     
-    if (result.rows.length === 0) {
+    if (!restaurant) {
       return NextResponse.json(
         { success: false, message: 'Restaurant not found' },
         { status: 404 }
@@ -18,7 +18,7 @@ export async function GET(
 
     return NextResponse.json({
       success: true,
-      data: result.rows[0]
+      data: restaurant
     });
   } catch (error) {
     console.error('Restaurant API error:', error);

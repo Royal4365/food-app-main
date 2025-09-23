@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { pool } from '@/lib/db';
+import { getMenuItems } from '@/lib/api-client';
 
 export async function GET(
   request: NextRequest,
@@ -8,12 +8,9 @@ export async function GET(
   try {
     const { id } = await context.params;
     
-    const result = await pool.query(
-      'SELECT * FROM menu_items WHERE restaurant_id = $1 ORDER BY name',
-      [id]
-    );
+    const menuItems = await getMenuItems(id);
     
-    return NextResponse.json({ success: true, data: result.rows });
+    return NextResponse.json({ success: true, data: menuItems });
   } catch (error) {
     console.error('Menu API error:', error);
     return NextResponse.json(
